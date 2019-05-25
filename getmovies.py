@@ -8,7 +8,7 @@ from pick import pick
 from tkinter import filedialog
 from bs4 import BeautifulSoup
 
-pagination_count = 2
+pagination_count = 32
 movies = []
 options_title_ext = 'Selecciona la extensión de tus películas:'
 options_ext = ['.mp4', '.avi', '.mkv', '.mov']
@@ -46,13 +46,23 @@ def get_movies(pagination_count):
     rating = temp_rating.split(' ')
     if(float(rating[0]) >= int(rating_filter)):
       worth_it = movie.find('a', string='1080p')
-      temp_url = str(options_torrent[index_torrent] + worth_it['href'])
-      movies.append(temp_url)
+      if(worth_it):
+        temp_url = str(options_torrent[index_torrent] + worth_it['href'])
+        movie_title = movie.find('a', class_ = 'browse-movie-title').string
+        movie_year = movie.find(class_ = 'browse-movie-year').string
+        movie_year = movie_year.replace(' ', '')
+        movie_title_year = f'{movie_title} ({movie_year})'
+        to_download = movie_title_year in files
+        if to_download:
+          print(f'Película {movie_title_year} ya existe.')
+        else:
+          movies.append(temp_url)
   with open('movies_to_download.txt', 'w') as text_file:
     for torrent in movies:
       print(f'{torrent}', file=text_file)
   pagination_count += 1
-  time.sleep(5)
+  time.sleep(7)
+  print(f'Moving to page {pagination_count}')
   get_movies(pagination_count)
 
 rating_filter = input('Ingresa rating de 1 a 10 para filtrar: ')

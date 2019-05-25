@@ -48,8 +48,10 @@ def get_movies(pagination_count):
       worth_it = movie.find('a', string='1080p')
       temp_url = str(options_torrent[index_torrent] + worth_it['href'])
       movies.append(temp_url)
+  with open('movies_to_download.txt', 'w') as text_file:
+    for torrent in movies:
+      print(f'{torrent}', file=text_file)
   pagination_count += 1
-  print(movies)
   time.sleep(5)
   get_movies(pagination_count)
 

@@ -8,7 +8,7 @@ from pick import pick
 from tkinter import filedialog
 from bs4 import BeautifulSoup
 
-pagination_count = 32
+pagination_count = 2
 movies = []
 options_title_ext = 'Selecciona la extensión de tus películas:'
 options_ext = ['.mp4', '.avi', '.mkv', '.mov']

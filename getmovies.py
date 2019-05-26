@@ -13,7 +13,8 @@ movies = []
 options_title_ext = 'Selecciona la extensión de tus películas:'
 options_ext = ['.mp4', '.avi', '.mkv', '.mov']
 options_torrent_title = 'Selecciona la fuente de torrents:'
-options_torrent = ['https://yts.pm/', 'https://yts.am/']
+# options_torrent = ['https://yts.pm/', 'https://yts.am/'] yts.am WIP
+options_torrent = ['https://yts.pm/']
 
 print('Selecciona ubicación de tus películas.')
 
